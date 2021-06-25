@@ -65,7 +65,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.FunctionApp.V3Static
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(List<Pet>), Summary = "successful operation", Description = "successful operation")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest, Summary = "Invalid tag value", Description = "Invalid tag value")]
         public static async Task<IActionResult> FindByTags(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "pet/findByTags")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "GET", Route = "pet/findByTags")] HttpRequest req,
             ILogger log)
         {
             return await Task.FromResult(new OkResult()).ConfigureAwait(false);
@@ -79,7 +79,21 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.FunctionApp.V3Static
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest, Summary = "Invalid ID supplied", Description = "Invalid ID supplied")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Summary = "Pet not found", Description = "Pet not found")]
         public static async Task<IActionResult> GetPetById(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "pet/{petId}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "GET", Route = "pet/{petId}")] HttpRequest req,
+            long petId,
+            ILogger log)
+        {
+            return await Task.FromResult(new OkResult()).ConfigureAwait(false);
+        }
+
+        [FunctionName(nameof(PetStoreHttpTrigger.UpdatePetWithForm))]
+        [OpenApiOperation(operationId: "updatePetWithForm", tags: new[] { "pet" }, Summary = "Updates a pet in the store with form data", Description = "Updates a pet in the store with form data.", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiSecurity("petstore_auth", SecuritySchemeType.OAuth2, Flows = typeof(PetStoreAuth))]
+        [OpenApiParameter(name: "petId", In = ParameterLocation.Path, Required = true, Type = typeof(long), Summary = "ID of pet to return", Description = "ID of pet to return", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiRequestBody(contentType: "application/x-www-form-urlencoded", bodyType: typeof(ApiFormUrlEncodedRequest), Required = true, Description = "Updated pet details")]
+        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.MethodNotAllowed, Summary = "Invalid input", Description = "Invalid input")]
+        public static async Task<IActionResult> UpdatePetWithForm(
+            [HttpTrigger(AuthorizationLevel.Function, "POST", Route = "pet/{petId}")] HttpRequest req,
             long petId,
             ILogger log)
         {

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Microsoft.OpenApi.Models;
 
@@ -47,11 +46,6 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core
         private string _indexHtml;
         private string _oauth2RedirectHtml;
 
-        public int Count => throw new NotImplementedException();
-
-        public bool IsReadOnly => throw new NotImplementedException();
-
-        public ServiceDescriptor this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         /// <inheritdoc />
         public ISwaggerUI AddMetadata(OpenApiInfo info)
@@ -232,56 +226,6 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core
             }
 
             return true;
-        }
-
-        public int IndexOf(ServiceDescriptor item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(int index, ServiceDescriptor item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveAt(int index)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Add(ServiceDescriptor item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Clear()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Contains(ServiceDescriptor item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CopyTo(ServiceDescriptor[] array, int arrayIndex)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(ServiceDescriptor item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerator<ServiceDescriptor> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
         }
     }
 }

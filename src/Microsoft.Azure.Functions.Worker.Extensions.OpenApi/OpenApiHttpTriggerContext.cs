@@ -42,6 +42,8 @@ namespace Microsoft.Azure.Functions.Worker.Extensions.OpenApi
         public OpenApiHttpTriggerContext()
         {
             this.PackageAssembly = this.GetAssembly<ISwaggerUI>();
+            this.PackageAssemblies = new Assembly[2];
+            this.PackageAssemblies[0] = PackageAssembly;
 
             var host = HostJsonResolver.Resolve();
             this.HttpSettings = host.GetHttpSettings();
@@ -113,6 +115,7 @@ namespace Microsoft.Azure.Functions.Worker.Extensions.OpenApi
 
         /// <inheritdoc />
         public virtual bool IsDevelopment { get; } = Environment.GetEnvironmentVariable("AZURE_FUNCTIONS_ENVIRONMENT") == "Development";
+        public Assembly[] PackageAssemblies { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         /// <inheritdoc />
         [Obsolete("This method is obsolete. Use GetAssembly<T>() or GetAssembly(object) instead", error: true)]
@@ -136,6 +139,7 @@ namespace Microsoft.Azure.Functions.Worker.Extensions.OpenApi
             var dllpath = $"{runtimepath}{Path.DirectorySeparatorChar}{runtimename}";
 
             this._dllpath = dllpath;
+            this.PackageAssemblies[1] = this.GetAssembly(dllpath);
 
             return this;
         }

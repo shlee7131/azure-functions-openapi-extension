@@ -27,6 +27,11 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions
         Assembly PackageAssembly { get; }
 
         /// <summary>
+        /// Gets the <see cref="Assembly"/> instances representing the Azure Functions OpenAPI Extension package.
+        /// </summary>
+        Assembly[] PackageAssemblies { get; set; }
+
+        /// <summary>
         /// Gets the <see cref="IOpenApiConfigurationOptions"/> instance.
         /// </summary>
         IOpenApiConfigurationOptions OpenApiConfigurationOptions { get; }
